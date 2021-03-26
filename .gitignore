@@ -1,1 +1,12 @@
 .vs/
+CMakeFiles/
+
+*.vcxproj
+*.sln
+*.filters
+*.cmake
+*.tcl
+
+!CTestConfig.cmake
+CMakeCache.txt
+CMake.h

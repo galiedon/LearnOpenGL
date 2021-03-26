@@ -8,3 +8,5 @@ set(CTEST_DROP_SITE_CDASH TRUE)
 
 # does the usage message work?
 add_test(Usage Debug/bin/LearnOpenGL)
+
+
