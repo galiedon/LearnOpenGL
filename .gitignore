@@ -1,6 +1,8 @@
 .vs/
-CMakeFiles/
 
+
+# 屏蔽在 "cmake ." 之后生成的文件
+CMakeFiles/
 *.vcxproj
 *.sln
 *.filters
@@ -10,3 +12,13 @@ CMakeFiles/
 !CTestConfig.cmake
 CMakeCache.txt
 CMake.h
+
+# 屏蔽在 "cmake --build ." 之后生成的文件
+x64/
+Testing/
+*.dir/
+
+# 屏蔽在 "cmake --install ." 之后生成的文件
+Debug/ 
+
+install_manifest.txt
