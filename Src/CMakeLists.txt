@@ -9,7 +9,9 @@ set(sources
     main.cpp
     DemoBase.cpp
     Demo1/Demo1.cpp
+    Demo2/Demo2.cpp
     Object/Object.cpp
+    Shader/Shader.cpp
     )
 
 
