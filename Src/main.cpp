@@ -1,8 +1,16 @@
 #include<iostream>
 using namespace std;
-#include <glad/glad.h>
+
+#include "include/main.h"
+#include "CMake.h"
+#include "DemoBase.h"
+#include "Demo1/Demo1.h"
 
 int main(){
-    cout << "Hello World!";
-    return 0;
+    
+    DemoBase* demo = new Demo1();
+
+    auto result = demo->run();
+
+    return result;
 }

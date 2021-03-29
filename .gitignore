@@ -1,4 +1,5 @@
 .vs/
+.vscode/
 
 
 # 屏蔽在 "cmake ." 之后生成的文件
@@ -21,4 +22,5 @@ Testing/
 # 屏蔽在 "cmake --install ." 之后生成的文件
 Debug/ 
 
+*.user
 install_manifest.txt
