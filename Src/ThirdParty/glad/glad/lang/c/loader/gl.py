@@ -123,6 +123,7 @@ static int has_ext(const char *ext) {
 _OPENGL_HEADER_START = '''
 #ifndef __glad_h_
 #define __glad_h_
+#define GLAD
 '''
 
 _OPENGL_HEADER_INCLUDE_ERROR = '''
