@@ -1,4 +1,4 @@
-#include "Object.h"
+﻿#include "Object.h"
 #include <fstream>
 using ifstream = std::ifstream;
 using ios = std::ios;
@@ -52,7 +52,7 @@ void Object::render(){
     shader.use();
     glBindVertexArray(m_VAO);
     // 3. 绘制物体
-    glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, (GLsizei)m_indices.size(), GL_UNSIGNED_INT, 0);
     // glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);
 }

@@ -13,7 +13,7 @@ using std::array;
 #define FAILED -1
 
 #define uint unsigned int
-
+#define uchar unsigned char
 typedef union{
     float v[4];
 

@@ -1,5 +1,4 @@
-
-#include "Demo2.h"
+﻿#include "Demo2.h"
 #include <iostream>
 
 static float vertices[] = {
@@ -29,9 +28,9 @@ Demo2::Demo2(uint width, uint height):DemoBase(width,height){
 
 void Demo2::render(){
     DemoBase::render();
-    m_rect.shader.setFloat("bias", sin(glfwGetTime()));
+    m_rect.shader.setFloat("bias", sin((float)glfwGetTime()));
 
-    float timeValue = glfwGetTime();
+    float timeValue = (float)glfwGetTime();
     float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
     int vertexColorLocation = glGetUniformLocation(m_rect.shader.m_id, "outColor");
     glUniform4f(vertexColorLocation, greenValue, greenValue, greenValue, 1.0f);
