@@ -25,11 +25,19 @@ Demo3::Demo3(uint width, uint height):DemoBase(width,height){
     vector<uint> vecId(indices, indices+sizeof(indices)/sizeof(uint));
 
     m_rect.init("src/Demo3/vs.glsl", "src/Demo3/fs.glsl", vecVert, vecId);
+    
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);  // 1. 设置顶点属性指针
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+    glEnableVertexAttribArray(1);  // 1. 设置顶点属性指针
+    
+    
     m_texture[0] = generateTexture("Resources/Textures/wall.jpg", GL_NEAREST, GL_REPEAT);
     m_texture[1] = generateTexture("Resources/Textures/awesomeface.png", GL_NEAREST, GL_REPEAT);
     m_rect.shader.setInt("texSampler", 0);
     m_rect.shader.setInt("texSampler2", 1);
     m_alpha = 0.5f;
+    
 }
 
 void Demo3::render(){
@@ -48,6 +56,11 @@ void Demo3::render(){
     glBindTexture(GL_TEXTURE_2D, m_texture[1]);
 
     m_rect.render();
+    
+    glBindVertexArray(m_rect.m_VAO);
+    // 3. 绘制物体
+    glDrawElements(GL_TRIANGLES, (GLsizei)m_rect.m_indices.size(), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
 }
 
 uint Demo3::generateTexture(string imgPath, uint filterType, uint repeatType){
