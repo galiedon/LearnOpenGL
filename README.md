@@ -9,6 +9,7 @@
 - [GLFW3](https://github.com/glfw/glfw)
 - [GLAD](https://github.com/Dav1dde/glad)
 - [stb](https://github.com/nothings/stb)
+- [glm](https://github.com/g-truc/glm)
 
 **下载**：`git clone https://github.com/galiedon/LearnOpenGL.git`
 

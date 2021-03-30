@@ -1,5 +1,6 @@
 #pragma once
 #include "../include/main.h"
+using glm::mat4;
 
 class Shader{
 
@@ -17,6 +18,7 @@ public:
     void setBool(const string &name, bool value) const;
     void setInt(const string &name, int value) const;
     void setFloat(const string &name, float value) const;
+    void setMat4(const string &name, uint columnMajorOrder, mat4 value) const;
 
     string readFile(string filePath);
 
