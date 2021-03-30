@@ -1,9 +1,0 @@
-# [submodule "Src/ThirdParty/glad"]
-# 	path = Src/ThirdParty/glad
-# 	url = https://github.com/Dav1dde/glad.git
-# [submodule "Src/ThirdParty/glfw"]
-# 	path = Src/ThirdParty/glfw
-# 	url = https://github.com/glfw/glfw.git
-# [submodule "soil"]
-# 	path = Src/ThirdParty/soil
-# 	url = https://github.com/paralin/soil.git

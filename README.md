@@ -10,7 +10,7 @@
 - [GLAD](https://github.com/Dav1dde/glad)
 - [stb](https://github.com/nothings/stb)
 
-**下载**：`git clone --recursive https://github.com/galiedon/LearnOpenGL.git`
+**下载**：`git clone https://github.com/galiedon/LearnOpenGL.git`
 
 **编译**：`build.bat`
 
