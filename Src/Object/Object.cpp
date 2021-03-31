@@ -33,6 +33,8 @@ void Object::init(){
     memcpy(frag, &m_indices[0], sizeof(uint) * m_indices.size());
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * m_indices.size(), frag, GL_STATIC_DRAW);
     delete frag;
+
+    m_model = mat4(1.0f);
 }
 
 void Object::init(string vsPath, string fsPath, vector<float> vecVert, vector<uint>vecId){

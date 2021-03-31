@@ -43,7 +43,7 @@ void Demo2::render(){
     
     glBindVertexArray(m_rect.m_VAO);
     // 3. 绘制物体
-    glDrawElements(GL_TRIANGLES, m_rect.m_indices.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, (GLsizei)m_rect.m_indices.size(), GL_UNSIGNED_INT, 0);
     // glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);
 }

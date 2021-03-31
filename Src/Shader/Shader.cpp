@@ -117,3 +117,7 @@ void Shader::setFloat(const string &name, float value) const{
 void Shader::setMat4(const string &name, uint columnMajorOrder, mat4 value) const{
     glUniformMatrix4fv(glGetUniformLocation(m_id, name.c_str()), 1, columnMajorOrder, value_ptr(value));
 }
+
+void Shader::setVec3(const string &name, vec3 value) const{
+    glUniform3fv(glGetUniformLocation(m_id, name.c_str()), 1, value_ptr(value));
+}
