@@ -1,7 +1,6 @@
-#include "Demo5.h"
+#include "Demo6.h"
 #include <iostream>
 #include "SOIL/SOIL.h"
-
 
 static float vertices[] = {
     // positions         // colors
@@ -18,16 +17,16 @@ static unsigned int indices[] = { // 注意索引从0开始!
 
 static float cube[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 
     -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
     -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
     -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
 
@@ -38,54 +37,86 @@ static float cube[] = {
     -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
     -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 
     -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+    0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
     -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
     -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
 
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
     -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-static glm::vec3 cubePositions[] = {
-    glm::vec3( 0.0f,  0.0f,  0.0f), 
-    glm::vec3( 2.0f,  5.0f, -15.0f), 
-    glm::vec3(-1.5f, -2.2f, -2.5f),  
-    glm::vec3(-3.8f, -2.0f, -12.3f),  
-    glm::vec3( 2.4f, -0.4f, -3.5f),  
-    glm::vec3(-1.7f,  3.0f, -7.5f),  
-    glm::vec3( 1.3f, -2.0f, -2.5f),  
-    glm::vec3( 1.5f,  2.0f, -2.5f), 
-    glm::vec3( 1.5f,  0.2f, -1.5f), 
-    glm::vec3(-1.3f,  1.0f, -1.5f)  
+static vec3 cubePositions[] = {
+    vec3( 0.0f,  0.0f,  0.0f), 
+    vec3( 2.0f,  5.0f, -15.0f), 
+    vec3(-1.5f, -2.2f, -2.5f),  
+    vec3(-3.8f, -2.0f, -12.3f),  
+    vec3( 2.4f, -0.4f, -3.5f),  
+    vec3(-1.7f,  3.0f, -7.5f),  
+    vec3( 1.3f, -2.0f, -2.5f),  
+    vec3( 1.5f,  2.0f, -2.5f), 
+    vec3( 1.5f,  0.2f, -1.5f), 
+    vec3(-1.3f,  1.0f, -1.5f)  
 };
 
+static float lastX = 400, lastY = 300;
+static float g_yaw = 0, g_pitch = 0, g_roll = 0;
+static bool firstMouse = true;
+
+static float fov = 45.0f;
+Camera* g_camera;
 
 static void resize_window(GLFWwindow* window, int width, int height){
+    lastX = width / 2.0f;
+    lastY = height / 2.0f;
     glViewport(0, 0, width, height);
 }
 
-Demo5::Demo5(uint width, uint height):DemoBase(width,height){
+static void mouse_callback(GLFWwindow* window, double xpos, double ypos){
+    
+    if(firstMouse)
+    {
+        lastX = (float)xpos;
+        lastY = (float)ypos;
+        firstMouse = false;
+        return;
+    }
+    float xoffset = (float)xpos - lastX;
+    float yoffset = lastY - (float)ypos; // 注意这里是相反的，因为y坐标是从底部往顶部依次增大的
+    lastX = (float)xpos;
+    lastY = (float)ypos;
 
+    g_camera->processMouseMovement(xoffset, yoffset);
+
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    g_camera->processMouseScroll(yoffset);
+}
+
+
+Demo6::Demo6(uint width, uint height):DemoBase(width,height){
+    // 设置窗体回调函数
     setWindowResizeCallBack(resize_window);
 
+    // 初始化顶点
     vector<float> vecVert(cube, cube+sizeof(cube)/sizeof(float));
     vector<uint> vecId(indices, indices+sizeof(indices)/sizeof(uint));
-
-    m_rect.init("src/Demo5/vs.glsl", "src/Demo5/fs.glsl", vecVert, vecId);
+    m_rect.init("src/Demo6/vs.glsl", "src/Demo6/fs.glsl", vecVert, vecId);
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);  // 1. 设置顶点属性指针
@@ -102,22 +133,32 @@ Demo5::Demo5(uint width, uint height):DemoBase(width,height){
     m_model = mat4(1.0f);
     m_model = rotate(m_model, radians(-55.0f), vec3(1.0f, 0, 0));
 
-    // 观察矩阵
-    m_view = mat4(1.0f);
-    m_view = translate(m_view, vec3(0, 0.0f, -5.0f));
-
     // 投影矩阵
-    m_proj = mat4(1.0f);
-    m_proj = perspective(radians(110.0f), (float)m_size.width/m_size.height, 0.1f, 100.0f);
+    m_proj = perspective(radians(fov), (float)m_size.width/m_size.height, 0.1f, 100.0f);
+
+    g_camera = &m_camera;
+
+    // 隐藏鼠标
+    glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
+    // 监听鼠标事件
+    // 原型void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+    glfwSetCursorPosCallback(m_window, mouse_callback);
+
+    // 监听鼠标滚轮事件
+    glfwSetScrollCallback(m_window, scroll_callback);
+
 }
 
-void Demo5::render(){
+void Demo6::render(){
     DemoBase::render();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     m_rect.shader.setFloat("bias", sin((float)glfwGetTime()));
     m_rect.shader.setFloat("alpha", m_alpha);
-    m_rect.shader.setMat4("view", GL_FALSE, m_view);
+
+    m_rect.shader.setMat4("view", GL_FALSE, m_camera.getViewMatrix());
+    m_proj = perspective(radians(fov), (float)m_size.width/m_size.height, 0.1f, 100.0f);
     m_rect.shader.setMat4("proj", GL_FALSE, m_proj);
 
     float timeValue = (float)glfwGetTime();
@@ -146,7 +187,7 @@ void Demo5::render(){
     glBindVertexArray(0);
 }
 
-uint Demo5::generateTexture(string imgPath, uint filterType, uint repeatType){
+uint Demo6::generateTexture(string imgPath, uint filterType, uint repeatType){
     int width, height;
     uint tex;
     // 加载图片
@@ -169,8 +210,6 @@ uint Demo5::generateTexture(string imgPath, uint filterType, uint repeatType){
 
     // 生成Texture
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    // glTextureParameteri(tex, GL_TEXTURE_BASE_LEVEL, 0);
-    // glTextureParameteri(tex, GL_TEXTURE_MAX_LEVEL, 4);
     // 生成Mipmap
     glGenerateMipmap(GL_TEXTURE_2D);
     // 释放图片与TextureID
@@ -180,13 +219,43 @@ uint Demo5::generateTexture(string imgPath, uint filterType, uint repeatType){
     return tex;
 }
 
-void Demo5::processInput(){
+void Demo6::processInput(){
 
     if(glfwGetKey(m_window, GLFW_KEY_UP) == GLFW_PRESS){
         m_alpha = m_alpha >= 1? 1: m_alpha + 0.01f;
-    }else if(glfwGetKey(m_window, GLFW_KEY_DOWN) == GLFW_PRESS){
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_DOWN) == GLFW_PRESS){
         m_alpha = m_alpha <= 0? 0: m_alpha - 0.01f;
     }
 
+    if(glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS){
+        m_camera.processKeyboard(FORWARD, m_deltaTime);
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS){
+        m_camera.processKeyboard(BACKWARD, m_deltaTime);
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS){
+        m_camera.processKeyboard(LEFT, m_deltaTime);
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS){
+        m_camera.processKeyboard(RIGHT, m_deltaTime);
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_TAB) == GLFW_PRESS){
+        tabIsPress = true;
+    }
+    if(glfwGetKey(m_window, GLFW_KEY_TAB) == GLFW_RELEASE){
+        if(tabIsPress){
+            switch (m_camera.m_type)
+            {
+            case LOCK_TARGET: m_camera.setCameraType(FREE_MOVE); break;
+
+            case FREE_MOVE: m_camera.setCameraType(LOCK_TARGET); break;
+            
+            default:
+                break;
+            }
+            tabIsPress = false;
+        }
+    }
     DemoBase::processInput();
 }

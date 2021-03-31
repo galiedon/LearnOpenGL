@@ -15,6 +15,7 @@ using std::array;
 #define SUCCESS 0
 #define FAILED -1
 
+
 typedef unsigned int uint;
 typedef unsigned char uchar;
 typedef union{

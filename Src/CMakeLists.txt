@@ -13,8 +13,10 @@ set(sources
     Demo3/Demo3.cpp
     Demo4/Demo4.cpp
     Demo5/Demo5.cpp
+    Demo6/Demo6.cpp
     
     Object/Object.cpp
+    Camera/Camera.cpp
     Shader/Shader.cpp
     )
 
