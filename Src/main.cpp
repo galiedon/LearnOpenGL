@@ -12,6 +12,7 @@ using namespace std;
 #include "Demo6/Demo6.h"
 #include "Demo7/Demo7.h"
 #include "Demo8/Demo8.h"
+#include "Demo9/Demo9.h"
 #include <SOIL/SOIL.h>
 using namespace glm;
 
@@ -31,7 +32,7 @@ void testGLM(){
 }
 
 int main(){
-    DemoBase* demo = new Demo8();
+    DemoBase* demo = new Demo9();
 
     auto result = demo->run();
 
