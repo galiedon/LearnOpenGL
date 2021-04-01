@@ -17,6 +17,7 @@ set(sources
     Demo7/Demo7.cpp
     Demo8/Demo8.cpp
     Demo9/Demo9.cpp
+    Demo10/Demo10.cpp
     
     Object/Object.cpp
     Camera/Camera.cpp
