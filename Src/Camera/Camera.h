@@ -12,7 +12,9 @@ typedef enum{
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN
 }CameraMovement;
 
 // Default camera values

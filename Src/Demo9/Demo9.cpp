@@ -157,9 +157,9 @@ void Demo9::render(){
     m_rect.shader.setVec3("material.specular", vec3(0.5f, 0.5f, 0.5f));
     m_rect.shader.setFloat("material.shininess", 32.0f);
     vec3 lightColor;
-    lightColor.x = sin(glfwGetTime() * 2.0f);
-    lightColor.y = sin(glfwGetTime() * 0.7f);
-    lightColor.z = sin(glfwGetTime() * 1.3f);
+    lightColor.x = (float)sin(glfwGetTime() * 2.0f);
+    lightColor.y = (float)sin(glfwGetTime() * 0.7f);
+    lightColor.z = (float)sin(glfwGetTime() * 1.3f);
 
     vec3 diffuseColor = lightColor   * vec3(0.5f); // 降低影响
     vec3 ambientColor = diffuseColor * vec3(0.2f); // 很低的影响
