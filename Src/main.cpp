@@ -15,26 +15,15 @@ using namespace std;
 #include "Demo9/Demo9.h"
 #include "Demo10/Demo10.h"
 #include "Demo11/Demo11.h"
+#include "Demo12/Demo12.h"
 #include <SOIL/SOIL.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 using namespace glm;
 
-
-void testGLM(){
-    vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
-    // 译注：下面就是矩阵初始化的一个例子，如果使用的是0.9.9及以上版本
-    // 下面这行代码就需要改为:
-    // mat4 trans = mat4(1.0f)
-    // 之后将不再进行提示
-    
-    mat4 trans(1.0f);
-    trans = translate(trans, vec3(1.0f, 1.0f, 0.0f));
-    vec = trans * vec;
-    
-    std::cout << vec.x << vec.y << vec.z << std::endl;
-}
-
 int main(){
-    DemoBase* demo = new Demo11();
+    DemoBase* demo = new Demo12();
 
     auto result = demo->run();
 

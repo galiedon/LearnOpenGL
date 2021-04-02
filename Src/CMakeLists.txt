@@ -19,8 +19,11 @@ set(sources
     Demo9/Demo9.cpp
     Demo10/Demo10.cpp
     Demo11/Demo11.cpp
+    Demo12/Demo12.cpp
     
     Object/Object.cpp
+    Object/Mesh.cpp
+    Object/Model.cpp
     Camera/Camera.cpp
     Shader/Shader.cpp
     )
@@ -32,10 +35,13 @@ target_link_libraries(LearnOpenGL PUBLIC
                         glfw
                         glad
                         soil
-                        glm)
+                        glm
+                        assimp
+                        )
 
 target_include_directories(LearnOpenGL PUBLIC 
                             "${GLFW_SOURCE_DIR}/include"
                             "${GLAD_SOURCE_DIR}/include"
                             "${GLFW_SOURCE_DIR}/../soil/inc"
-                            "${GLFW_SOURCE_DIR}/../glm/glm")
+                            "${GLFW_SOURCE_DIR}/../glm/glm"
+                            "${ASSIMP_INCLUDE_INSTALL_DIR}")

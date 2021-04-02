@@ -148,7 +148,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	OK, make it a texture!	*/
@@ -192,7 +192,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/* the load worked, do I need to convert it? */
@@ -258,7 +258,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	OK, make it a texture!	*/
@@ -318,7 +318,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	upload the texture, and create a texture ID if necessary	*/
@@ -342,7 +342,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -367,7 +367,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -392,7 +392,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -417,7 +417,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -442,7 +442,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -511,7 +511,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	upload the texture, and create a texture ID if necessary	*/
@@ -537,7 +537,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -564,7 +564,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -591,7 +591,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -618,7 +618,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -645,7 +645,7 @@ unsigned int
 		if( NULL == img )
 		{
 			/*	image loading failed	*/
-			result_string_pointer = stbi_failure_reason();
+			result_string_pointer = stbi_failure_reason_soil();
 			return 0;
 		}
 		/*	upload the texture, but reuse the assigned texture ID	*/
@@ -725,7 +725,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	now, does this image have the right dimensions?	*/
@@ -816,7 +816,7 @@ unsigned int
 	if( NULL == img )
 	{
 		/*	image loading failed	*/
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 		return 0;
 	}
 	/*	now, does this image have the right dimensions?	*/
@@ -1435,11 +1435,11 @@ unsigned char*
 		int force_channels
 	)
 {
-	unsigned char *result = stbi_load( filename,
+	unsigned char *result = stbi_load_soil( filename,
 			width, height, channels, force_channels );
 	if( result == NULL )
 	{
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 	} else
 	{
 		result_string_pointer = "Image loaded";
@@ -1456,13 +1456,13 @@ unsigned char*
 		int force_channels
 	)
 {
-	unsigned char *result = stbi_load_from_memory(
+	unsigned char *result = stbi_load_from_memory_soil(
 				buffer, buffer_length,
 				width, height, channels,
 				force_channels );
 	if( result == NULL )
 	{
-		result_string_pointer = stbi_failure_reason();
+		result_string_pointer = stbi_failure_reason_soil();
 	} else
 	{
 		result_string_pointer = "Image loaded from memory";

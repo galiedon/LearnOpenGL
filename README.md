@@ -10,6 +10,7 @@
 - [GLAD](https://github.com/Dav1dde/glad)
 - [SOIL](https://github.com/paralin/soil)
 - [glm](https://github.com/g-truc/glm)
+- [assimp](https://github.com/assimp/assimp)
 
 **下载**：`git clone https://github.com/galiedon/LearnOpenGL.git`
 
@@ -32,6 +33,7 @@ TODO
 9. `Demo9`：引入材质概念，调整光照计算公式
 10. `Demo10`：引入光照贴图（漫反射贴图、镜面光照贴图）
 11. `Demo11`：引入不同类型的光源（平行光、点光、聚光）, 并搭建多光源场景。
+11. `Demo12`：引入顶点、网格、模型。
 
 
 **问题**：

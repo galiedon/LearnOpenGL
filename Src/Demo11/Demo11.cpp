@@ -105,7 +105,7 @@ static LightTestId lightTestId = MIX_LIGHTING_TEST;
     static const char* const cube_diffuse = "../Resources/Textures/container2.png";
     static const char* const cube_specular = "../Resources/Textures/container2_specular.png";
     static const char* const cube_emissive = "../Resources/Textures/matrix.jpg";
-    static const char* const flashLightTexture = "Resources/Textures/hahachan017-cc.jpg";
+    static const char* const flashLightTexture = "../Resources/Textures/hahachan017-cc.jpg";
 #endif
 
 static void resize_window(GLFWwindow* window, int width, int height){
