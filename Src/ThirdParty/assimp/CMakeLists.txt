@@ -330,8 +330,8 @@ IF (ASSIMP_UBSAN)
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined,shift,shift-exponent,integer-divide-by-zero,unreachable,vla-bound,null,return,signed-integer-overflow,bounds,float-divide-by-zero,float-cast-overflow,nonnull-attribute,returns-nonnull-attribute,bool,enum,vptr,pointer-overflow,builtin -fno-sanitize-recover=all")
 ENDIF()
 
-INCLUDE (FindPkgMacros)
-INCLUDE (PrecompiledHeader)
+# INCLUDE (FindPkgMacros)
+# INCLUDE (PrecompiledHeader)
 
 # Set Assimp project output directory variables.
 SET(ASSIMP_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
