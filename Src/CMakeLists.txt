@@ -20,6 +20,7 @@ set(sources
     Demo10/Demo10.cpp
     Demo11/Demo11.cpp
     Demo12/Demo12.cpp
+    Demo13/Demo13.cpp
     
     Object/Object.cpp
     Object/Mesh.cpp

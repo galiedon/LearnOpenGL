@@ -16,6 +16,7 @@ using namespace std;
 #include "Demo10/Demo10.h"
 #include "Demo11/Demo11.h"
 #include "Demo12/Demo12.h"
+#include "Demo13/Demo13.h"
 #include <SOIL/SOIL.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -23,7 +24,7 @@ using namespace std;
 using namespace glm;
 
 int main(){
-    DemoBase* demo = new Demo12();
+    DemoBase* demo = new Demo13();
 
     auto result = demo->run();
 
