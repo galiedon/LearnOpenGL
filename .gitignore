@@ -20,7 +20,10 @@ Testing/
 *.dir/
 
 # 屏蔽在 "cmake --install ." 之后生成的文件
-Debug/ 
+**/Debug/ 
+**/Binaries/
+**/Build/
+
 
 *.user
 install_manifest.txt

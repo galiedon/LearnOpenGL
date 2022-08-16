@@ -1,1 +1,1 @@
-Debug\bin\LearnOpenGL.exe %*
+Binaries\Debug\bin\LearnOpenGL.exe %*
