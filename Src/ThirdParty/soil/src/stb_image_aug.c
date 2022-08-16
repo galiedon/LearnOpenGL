@@ -66,7 +66,7 @@ typedef unsigned char validate_uint32[sizeof(uint32)==4];
 // this is not threadsafe
 static char *failure_reason;
 
-char *stbi_failure_reason(void)
+char *stbi_failure_reason_soil(void)
 {
    return failure_reason;
 }
@@ -88,7 +88,7 @@ static int e(char *str)
 #define epf(x,y)   ((float *) (e(x,y)?NULL:NULL))
 #define epuc(x,y)  ((unsigned char *) (e(x,y)?NULL:NULL))
 
-void stbi_image_free(void *retval_from_stbi_load)
+void stbi_image_free_soil(void *retval_from_stbi_load)
 {
    free(retval_from_stbi_load);
 }
@@ -121,17 +121,17 @@ static stbi_uc *hdr_to_ldr(float   *data, int x, int y, int comp);
 #endif
 
 #ifndef STBI_NO_STDIO
-unsigned char *stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_soil(char const *filename, int *x, int *y, int *comp, int req_comp)
 {
    FILE *f = fopen(filename, "rb");
    unsigned char *result;
    if (!f) return epuc("can't fopen", "Unable to open file");
-   result = stbi_load_from_file(f,x,y,comp,req_comp);
+   result = stbi_load_from_file_soil(f,x,y,comp,req_comp);
    fclose(f);
    return result;
 }
 
-unsigned char *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_from_file_soil(FILE *f, int *x, int *y, int *comp, int req_comp)
 {
    int i;
    if (stbi_jpeg_test_file(f))
@@ -162,7 +162,7 @@ unsigned char *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_c
 }
 #endif
 
-unsigned char *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
 {
    int i;
    if (stbi_jpeg_test_memory(buffer,len))
@@ -195,38 +195,38 @@ unsigned char *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int
 #ifndef STBI_NO_HDR
 
 #ifndef STBI_NO_STDIO
-float *stbi_loadf(char const *filename, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_soil(char const *filename, int *x, int *y, int *comp, int req_comp)
 {
    FILE *f = fopen(filename, "rb");
    float *result;
    if (!f) return epf("can't fopen", "Unable to open file");
-   result = stbi_loadf_from_file(f,x,y,comp,req_comp);
+   result = stbi_loadf_from_file_soil(f,x,y,comp,req_comp);
    fclose(f);
    return result;
 }
 
-float *stbi_loadf_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_from_file_soil(FILE *f, int *x, int *y, int *comp, int req_comp)
 {
    unsigned char *data;
    #ifndef STBI_NO_HDR
    if (stbi_hdr_test_file(f))
       return stbi_hdr_load_from_file(f,x,y,comp,req_comp);
    #endif
-   data = stbi_load_from_file(f, x, y, comp, req_comp);
+   data = stbi_load_from_file_soil(f, x, y, comp, req_comp);
    if (data)
       return ldr_to_hdr(data, *x, *y, req_comp ? req_comp : *comp);
    return epf("unknown image type", "Image not of any known type, or corrupt");
 }
 #endif
 
-float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
 {
    stbi_uc *data;
    #ifndef STBI_NO_HDR
    if (stbi_hdr_test_memory(buffer, len))
       return stbi_hdr_load_from_memory(buffer, len,x,y,comp,req_comp);
    #endif
-   data = stbi_load_from_memory(buffer, len, x, y, comp, req_comp);
+   data = stbi_load_from_memory_soil(buffer, len, x, y, comp, req_comp);
    if (data)
       return ldr_to_hdr(data, *x, *y, req_comp ? req_comp : *comp);
    return epf("unknown image type", "Image not of any known type, or corrupt");
@@ -237,7 +237,7 @@ float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, in
 // defined, for API simplicity; if STBI_NO_HDR is defined, it always
 // reports false!
 
-int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)
+int stbi_is_hdr_from_memory_soil(stbi_uc const *buffer, int len)
 {
    #ifndef STBI_NO_HDR
    return stbi_hdr_test_memory(buffer, len);
@@ -247,18 +247,18 @@ int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)
 }
 
 #ifndef STBI_NO_STDIO
-extern int      stbi_is_hdr          (char const *filename)
+extern int      stbi_is_hdr_soil          (char const *filename)
 {
    FILE *f = fopen(filename, "rb");
    int result=0;
    if (f) {
-      result = stbi_is_hdr_from_file(f);
+      result = stbi_is_hdr_from_file_soil(f);
       fclose(f);
    }
    return result;
 }
 
-extern int      stbi_is_hdr_from_file(FILE *f)
+extern int      stbi_is_hdr_from_file_soil(FILE *f)
 {
    #ifndef STBI_NO_HDR
    return stbi_hdr_test_file(f);
@@ -280,11 +280,11 @@ extern int      stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, in
 static float h2l_gamma_i=1.0f/2.2f, h2l_scale_i=1.0f;
 static float l2h_gamma=2.2f, l2h_scale=1.0f;
 
-void   stbi_hdr_to_ldr_gamma(float gamma) { h2l_gamma_i = 1/gamma; }
-void   stbi_hdr_to_ldr_scale(float scale) { h2l_scale_i = 1/scale; }
+void   stbi_hdr_to_ldr_gamma_soil(float gamma) { h2l_gamma_i = 1/gamma; }
+void   stbi_hdr_to_ldr_scale_soil(float scale) { h2l_scale_i = 1/scale; }
 
-void   stbi_ldr_to_hdr_gamma(float gamma) { l2h_gamma = gamma; }
-void   stbi_ldr_to_hdr_scale(float scale) { l2h_scale = scale; }
+void   stbi_ldr_to_hdr_gamma_soil(float gamma) { l2h_gamma = gamma; }
+void   stbi_ldr_to_hdr_scale_soil(float scale) { l2h_scale = scale; }
 #endif
 
 
@@ -1901,7 +1901,7 @@ static int do_zlib(zbuf *a, char *obuf, int olen, int exp, int parse_header)
    return parse_zlib(a, parse_header);
 }
 
-char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen)
+char *stbi_zlib_decode_malloc_guesssize_soil(const char *buffer, int len, int initial_size, int *outlen)
 {
    zbuf a;
    char *p = (char *) malloc(initial_size);
@@ -1917,12 +1917,12 @@ char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial
    }
 }
 
-char *stbi_zlib_decode_malloc(char const *buffer, int len, int *outlen)
+char *stbi_zlib_decode_malloc_soil(char const *buffer, int len, int *outlen)
 {
-   return stbi_zlib_decode_malloc_guesssize(buffer, len, 16384, outlen);
+   return stbi_zlib_decode_malloc_guesssize_soil(buffer, len, 16384, outlen);
 }
 
-int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int ilen)
+int stbi_zlib_decode_buffer_soil(char *obuffer, int olen, char const *ibuffer, int ilen)
 {
    zbuf a;
    a.zbuffer = (uint8 *) ibuffer;
@@ -1933,7 +1933,7 @@ int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int il
       return -1;
 }
 
-char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)
+char *stbi_zlib_decode_noheader_malloc_soil(char const *buffer, int len, int *outlen)
 {
    zbuf a;
    char *p = (char *) malloc(16384);
@@ -1949,7 +1949,7 @@ char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)
    }
 }
 
-int stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen)
+int stbi_zlib_decode_noheader_buffer_soil(char *obuffer, int olen, const char *ibuffer, int ilen)
 {
    zbuf a;
    a.zbuffer = (uint8 *) ibuffer;
@@ -2260,7 +2260,7 @@ static int parse_png_file(png *z, int scan, int req_comp)
             uint32 raw_len;
             if (scan != SCAN_load) return 1;
             if (z->idata == NULL) return e("no IDAT","Corrupt PNG");
-            z->expanded = (uint8 *) stbi_zlib_decode_malloc((char *) z->idata, ioff, (int *) &raw_len);
+            z->expanded = (uint8 *) stbi_zlib_decode_malloc_soil((char *) z->idata, ioff, (int *) &raw_len);
             if (z->expanded == NULL) return 0; // zlib should set error
             free(z->idata); z->idata = NULL;
             if ((req_comp == s->img_n+1 && req_comp != 3 && !pal_img_n) || has_trans)

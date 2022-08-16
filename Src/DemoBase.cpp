@@ -40,6 +40,9 @@ int DemoBase::init(){
 
 int DemoBase::run(){
     while(!glfwWindowShouldClose(m_window)){
+        float currentFrame = (float)glfwGetTime();
+        m_deltaTime = currentFrame - m_lastFrame;
+        m_lastFrame = currentFrame;
         processInput();
 
         render();

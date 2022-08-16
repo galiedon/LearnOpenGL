@@ -34,10 +34,7 @@ void Object::init(){
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * m_indices.size(), frag, GL_STATIC_DRAW);
     delete frag;
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);  // 1. 设置顶点属性指针
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
-    glEnableVertexAttribArray(1);  // 1. 设置顶点属性指针
+    m_model = mat4(1.0f);
 }
 
 void Object::init(string vsPath, string fsPath, vector<float> vecVert, vector<uint>vecId){
@@ -50,9 +47,4 @@ void Object::init(string vsPath, string fsPath, vector<float> vecVert, vector<ui
 
 void Object::render(){
     shader.use();
-    glBindVertexArray(m_VAO);
-    // 3. 绘制物体
-    glDrawElements(GL_TRIANGLES, (GLsizei)m_indices.size(), GL_UNSIGNED_INT, 0);
-    // glDrawArrays(GL_TRIANGLES, 0, 3);
-    glBindVertexArray(0);
 }

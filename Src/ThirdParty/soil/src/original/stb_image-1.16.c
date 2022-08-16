@@ -32,7 +32,7 @@
       1.07   attempt to fix C++ warning/errors again
       1.06   attempt to fix C++ warning/errors again
       1.05   fix TGA loading to return correct *comp and use good luminance calc
-      1.04   default float alpha is 1, not 255; use 'void *' for stbi_image_free
+      1.04   default float alpha is 1, not 255; use 'void *' for stbi_image_free_soil
       1.03   bugfixes to STBI_NO_STDIO, STBI_NO_HDR
       1.02   support for (subset of) HDR files, float interface for preferred access to them
       1.01   fix bug: possible bug in handling right-side up bmps... not sure
@@ -78,11 +78,11 @@
 //
 // Basic usage (see HDR discussion below):
 //    int x,y,n;
-//    unsigned char *data = stbi_load(filename, &x, &y, &n, 0);
+//    unsigned char *data = stbi_load_soil(filename, &x, &y, &n, 0);
 //    // ... process data if not NULL ... 
 //    // ... x = width, y = height, n = # 8-bit components per pixel ...
 //    // ... replace '0' with '1'..'4' to force that many components per pixel
-//    stbi_image_free(data)
+//    stbi_image_free_soil(data)
 //
 // Standard parameters:
 //    int *x       -- outputs image width in pixels
@@ -110,7 +110,7 @@
 //       4           red, green, blue, alpha
 //
 // If image loading fails for any reason, the return value will be NULL,
-// and *x, *y, *comp will be unchanged. The function stbi_failure_reason()
+// and *x, *y, *comp will be unchanged. The function stbi_failure_reason_soil()
 // can be queried for an extremely brief, end-user unfriendly explanation
 // of why the load failed. Define STBI_NO_FAILURE_STRINGS to avoid
 // compiling these strings at all, and STBI_FAILURE_USERMSG to get slightly
@@ -130,8 +130,8 @@
 // LDR, assuming gamma 2.2 and an arbitrary scale factor defaulting to 1;
 // both of these constants can be reconfigured through this interface:
 //
-//     stbi_hdr_to_ldr_gamma(2.2f);
-//     stbi_hdr_to_ldr_scale(1.0f);
+//     stbi_hdr_to_ldr_gamma_soil(2.2f);
+//     stbi_hdr_to_ldr_scale_soil(1.0f);
 //
 // (note, do not use _inverse_ constants; stbi_image will invert them
 // appropriately).
@@ -139,21 +139,21 @@
 // Additionally, there is a new, parallel interface for loading files as
 // (linear) floats to preserve the full dynamic range:
 //
-//    float *data = stbi_loadf(filename, &x, &y, &n, 0);
+//    float *data = stbi_loadf_soil(filename, &x, &y, &n, 0);
 // 
 // If you load LDR images through this interface, those images will
 // be promoted to floating point values, run through the inverse of
 // constants corresponding to the above:
 //
-//     stbi_ldr_to_hdr_scale(1.0f);
-//     stbi_ldr_to_hdr_gamma(2.2f);
+//     stbi_ldr_to_hdr_scale_soil(1.0f);
+//     stbi_ldr_to_hdr_gamma_soil(2.2f);
 //
 // Finally, given a filename (or an open file or memory block--see header
 // file for details) containing image data, you can query for the "most
 // appropriate" interface to use (that is, whether the image is HDR or
 // not), using:
 //
-//     stbi_is_hdr(char *filename);
+//     stbi_is_hdr_soil(char *filename);
 
 #ifndef STBI_NO_STDIO
 #include <stdio.h>
@@ -191,52 +191,52 @@ extern int      stbi_write_tga       (char const *filename,     int x, int y, in
 
 // load image by filename, open file, or memory buffer
 #ifndef STBI_NO_STDIO
-extern stbi_uc *stbi_load            (char const *filename,     int *x, int *y, int *comp, int req_comp);
-extern stbi_uc *stbi_load_from_file  (FILE *f,                  int *x, int *y, int *comp, int req_comp);
+extern stbi_uc *stbi_load_soil            (char const *filename,     int *x, int *y, int *comp, int req_comp);
+extern stbi_uc *stbi_load_from_file_soil  (FILE *f,                  int *x, int *y, int *comp, int req_comp);
 extern int      stbi_info_from_file  (FILE *f,                  int *x, int *y, int *comp);
 #endif
-extern stbi_uc *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp);
-// for stbi_load_from_file, file pointer is left pointing immediately after image
+extern stbi_uc *stbi_load_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp);
+// for stbi_load_from_file_soil, file pointer is left pointing immediately after image
 
 #ifndef STBI_NO_HDR
 #ifndef STBI_NO_STDIO
-extern float *stbi_loadf            (char const *filename,     int *x, int *y, int *comp, int req_comp);
-extern float *stbi_loadf_from_file  (FILE *f,                  int *x, int *y, int *comp, int req_comp);
+extern float *stbi_loadf_soil            (char const *filename,     int *x, int *y, int *comp, int req_comp);
+extern float *stbi_loadf_from_file_soil  (FILE *f,                  int *x, int *y, int *comp, int req_comp);
 #endif
-extern float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp);
+extern float *stbi_loadf_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp);
 
-extern void   stbi_hdr_to_ldr_gamma(float gamma);
-extern void   stbi_hdr_to_ldr_scale(float scale);
+extern void   stbi_hdr_to_ldr_gamma_soil(float gamma);
+extern void   stbi_hdr_to_ldr_scale_soil(float scale);
 
-extern void   stbi_ldr_to_hdr_gamma(float gamma);
-extern void   stbi_ldr_to_hdr_scale(float scale);
+extern void   stbi_ldr_to_hdr_gamma_soil(float gamma);
+extern void   stbi_ldr_to_hdr_scale_soil(float scale);
 
 #endif // STBI_NO_HDR
 
 // get a VERY brief reason for failure
 // NOT THREADSAFE
-extern char    *stbi_failure_reason  (void); 
+extern char    *stbi_failure_reason_soil  (void); 
 
 // free the loaded image -- this is just free()
-extern void     stbi_image_free      (void *retval_from_stbi_load);
+extern void     stbi_image_free_soil      (void *retval_from_stbi_load);
 
 // get image dimensions & components without fully decoding
 extern int      stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp);
-extern int      stbi_is_hdr_from_memory(stbi_uc const *buffer, int len);
+extern int      stbi_is_hdr_from_memory_soil(stbi_uc const *buffer, int len);
 #ifndef STBI_NO_STDIO
 extern int      stbi_info            (char const *filename,     int *x, int *y, int *comp);
-extern int      stbi_is_hdr          (char const *filename);
-extern int      stbi_is_hdr_from_file(FILE *f);
+extern int      stbi_is_hdr_soil          (char const *filename);
+extern int      stbi_is_hdr_from_file_soil(FILE *f);
 #endif
 
 // ZLIB client - used by PNG, available for other purposes
 
-extern char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen);
-extern char *stbi_zlib_decode_malloc(const char *buffer, int len, int *outlen);
-extern int   stbi_zlib_decode_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
+extern char *stbi_zlib_decode_malloc_guesssize_soil(const char *buffer, int len, int initial_size, int *outlen);
+extern char *stbi_zlib_decode_malloc_soil(const char *buffer, int len, int *outlen);
+extern int   stbi_zlib_decode_buffer_soil(char *obuffer, int olen, const char *ibuffer, int ilen);
 
-extern char *stbi_zlib_decode_noheader_malloc(const char *buffer, int len, int *outlen);
-extern int   stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
+extern char *stbi_zlib_decode_noheader_malloc_soil(const char *buffer, int len, int *outlen);
+extern int   stbi_zlib_decode_noheader_buffer_soil(char *obuffer, int olen, const char *ibuffer, int ilen);
 
 // TYPE-SPECIFIC ACCESS
 
@@ -398,7 +398,7 @@ typedef unsigned char validate_uint32[sizeof(uint32)==4];
 // this is not threadsafe
 static char *failure_reason;
 
-char *stbi_failure_reason(void)
+char *stbi_failure_reason_soil(void)
 {
    return failure_reason;
 }
@@ -420,7 +420,7 @@ static int e(char *str)
 #define epf(x,y)   ((float *) (e(x,y)?NULL:NULL))
 #define epuc(x,y)  ((unsigned char *) (e(x,y)?NULL:NULL))
 
-void stbi_image_free(void *retval_from_stbi_load)
+void stbi_image_free_soil(void *retval_from_stbi_load)
 {
    free(retval_from_stbi_load);
 }
@@ -453,17 +453,17 @@ static stbi_uc *hdr_to_ldr(float   *data, int x, int y, int comp);
 #endif
 
 #ifndef STBI_NO_STDIO
-unsigned char *stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_soil(char const *filename, int *x, int *y, int *comp, int req_comp)
 {
    FILE *f = fopen(filename, "rb");
    unsigned char *result;
    if (!f) return epuc("can't fopen", "Unable to open file");
-   result = stbi_load_from_file(f,x,y,comp,req_comp);
+   result = stbi_load_from_file_soil(f,x,y,comp,req_comp);
    fclose(f);
    return result;
 }
 
-unsigned char *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_from_file_soil(FILE *f, int *x, int *y, int *comp, int req_comp)
 {
    int i;
    if (stbi_jpeg_test_file(f))
@@ -490,7 +490,7 @@ unsigned char *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req_c
 }
 #endif
 
-unsigned char *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
+unsigned char *stbi_load_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
 {
    int i;
    if (stbi_jpeg_test_memory(buffer,len))
@@ -519,38 +519,38 @@ unsigned char *stbi_load_from_memory(stbi_uc const *buffer, int len, int *x, int
 #ifndef STBI_NO_HDR
 
 #ifndef STBI_NO_STDIO
-float *stbi_loadf(char const *filename, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_soil(char const *filename, int *x, int *y, int *comp, int req_comp)
 {
    FILE *f = fopen(filename, "rb");
    float *result;
    if (!f) return epf("can't fopen", "Unable to open file");
-   result = stbi_loadf_from_file(f,x,y,comp,req_comp);
+   result = stbi_loadf_from_file_soil(f,x,y,comp,req_comp);
    fclose(f);
    return result;
 }
 
-float *stbi_loadf_from_file(FILE *f, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_from_file_soil(FILE *f, int *x, int *y, int *comp, int req_comp)
 {
    unsigned char *data;
    #ifndef STBI_NO_HDR
    if (stbi_hdr_test_file(f))
       return stbi_hdr_load_from_file(f,x,y,comp,req_comp);
    #endif
-   data = stbi_load_from_file(f, x, y, comp, req_comp);
+   data = stbi_load_from_file_soil(f, x, y, comp, req_comp);
    if (data)
       return ldr_to_hdr(data, *x, *y, req_comp ? req_comp : *comp);
    return epf("unknown image type", "Image not of any known type, or corrupt");
 }
 #endif
 
-float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
+float *stbi_loadf_from_memory_soil(stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp)
 {
    stbi_uc *data;
    #ifndef STBI_NO_HDR
    if (stbi_hdr_test_memory(buffer, len))
       return stbi_hdr_load_from_memory(buffer, len,x,y,comp,req_comp);
    #endif
-   data = stbi_load_from_memory(buffer, len, x, y, comp, req_comp);
+   data = stbi_load_from_memory_soil(buffer, len, x, y, comp, req_comp);
    if (data)
       return ldr_to_hdr(data, *x, *y, req_comp ? req_comp : *comp);
    return epf("unknown image type", "Image not of any known type, or corrupt");
@@ -561,7 +561,7 @@ float *stbi_loadf_from_memory(stbi_uc const *buffer, int len, int *x, int *y, in
 // defined, for API simplicity; if STBI_NO_HDR is defined, it always
 // reports false!
 
-int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)
+int stbi_is_hdr_from_memory_soil(stbi_uc const *buffer, int len)
 {
    #ifndef STBI_NO_HDR
    return stbi_hdr_test_memory(buffer, len);
@@ -571,18 +571,18 @@ int stbi_is_hdr_from_memory(stbi_uc const *buffer, int len)
 }
 
 #ifndef STBI_NO_STDIO
-extern int      stbi_is_hdr          (char const *filename)
+extern int      stbi_is_hdr_soil          (char const *filename)
 {
    FILE *f = fopen(filename, "rb");
    int result=0;
    if (f) {
-      result = stbi_is_hdr_from_file(f);
+      result = stbi_is_hdr_from_file_soil(f);
       fclose(f);
    }
    return result;
 }
 
-extern int      stbi_is_hdr_from_file(FILE *f)
+extern int      stbi_is_hdr_from_file_soil(FILE *f)
 {
    #ifndef STBI_NO_HDR
    return stbi_hdr_test_file(f);
@@ -604,11 +604,11 @@ extern int      stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, in
 static float h2l_gamma_i=1.0f/2.2f, h2l_scale_i=1.0f;
 static float l2h_gamma=2.2f, l2h_scale=1.0f;
 
-void   stbi_hdr_to_ldr_gamma(float gamma) { h2l_gamma_i = 1/gamma; }
-void   stbi_hdr_to_ldr_scale(float scale) { h2l_scale_i = 1/scale; }
+void   stbi_hdr_to_ldr_gamma_soil(float gamma) { h2l_gamma_i = 1/gamma; }
+void   stbi_hdr_to_ldr_scale_soil(float scale) { h2l_scale_i = 1/scale; }
 
-void   stbi_ldr_to_hdr_gamma(float gamma) { l2h_gamma = gamma; }
-void   stbi_ldr_to_hdr_scale(float scale) { l2h_scale = scale; }
+void   stbi_ldr_to_hdr_gamma_soil(float gamma) { l2h_gamma = gamma; }
+void   stbi_ldr_to_hdr_scale_soil(float scale) { l2h_scale = scale; }
 #endif
 
 
@@ -2225,7 +2225,7 @@ static int do_zlib(zbuf *a, char *obuf, int olen, int exp, int parse_header)
    return parse_zlib(a, parse_header);
 }
 
-char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen)
+char *stbi_zlib_decode_malloc_guesssize_soil(const char *buffer, int len, int initial_size, int *outlen)
 {
    zbuf a;
    char *p = (char *) malloc(initial_size);
@@ -2241,12 +2241,12 @@ char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial
    }
 }
 
-char *stbi_zlib_decode_malloc(char const *buffer, int len, int *outlen)
+char *stbi_zlib_decode_malloc_soil(char const *buffer, int len, int *outlen)
 {
-   return stbi_zlib_decode_malloc_guesssize(buffer, len, 16384, outlen);
+   return stbi_zlib_decode_malloc_guesssize_soil(buffer, len, 16384, outlen);
 }
 
-int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int ilen)
+int stbi_zlib_decode_buffer_soil(char *obuffer, int olen, char const *ibuffer, int ilen)
 {
    zbuf a;
    a.zbuffer = (uint8 *) ibuffer;
@@ -2257,7 +2257,7 @@ int stbi_zlib_decode_buffer(char *obuffer, int olen, char const *ibuffer, int il
       return -1;
 }
 
-char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)
+char *stbi_zlib_decode_noheader_malloc_soil(char const *buffer, int len, int *outlen)
 {
    zbuf a;
    char *p = (char *) malloc(16384);
@@ -2273,7 +2273,7 @@ char *stbi_zlib_decode_noheader_malloc(char const *buffer, int len, int *outlen)
    }
 }
 
-int stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen)
+int stbi_zlib_decode_noheader_buffer_soil(char *obuffer, int olen, const char *ibuffer, int ilen)
 {
    zbuf a;
    a.zbuffer = (uint8 *) ibuffer;
@@ -2584,7 +2584,7 @@ static int parse_png_file(png *z, int scan, int req_comp)
             uint32 raw_len;
             if (scan != SCAN_load) return 1;
             if (z->idata == NULL) return e("no IDAT","Corrupt PNG");
-            z->expanded = (uint8 *) stbi_zlib_decode_malloc((char *) z->idata, ioff, (int *) &raw_len);
+            z->expanded = (uint8 *) stbi_zlib_decode_malloc_soil((char *) z->idata, ioff, (int *) &raw_len);
             if (z->expanded == NULL) return 0; // zlib should set error
             free(z->idata); z->idata = NULL;
             if ((req_comp == s->img_n+1 && req_comp != 3 && !pal_img_n) || has_trans)

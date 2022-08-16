@@ -24,6 +24,11 @@ Demo2::Demo2(uint width, uint height):DemoBase(width,height){
     vector<uint> vecId(indices, indices+sizeof(indices)/sizeof(uint));
 
     m_rect.init("src/Demo2/vs.glsl", "src/Demo2/fs.glsl", vecVert, vecId);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);  // 1. 设置顶点属性指针
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+    glEnableVertexAttribArray(1);  // 1. 设置顶点属性指针
 }
 
 void Demo2::render(){
@@ -35,4 +40,10 @@ void Demo2::render(){
     int vertexColorLocation = glGetUniformLocation(m_rect.shader.m_id, "outColor");
     glUniform4f(vertexColorLocation, greenValue, greenValue, greenValue, 1.0f);
     m_rect.render();
+    
+    glBindVertexArray(m_rect.m_VAO);
+    // 3. 绘制物体
+    glDrawElements(GL_TRIANGLES, (GLsizei)m_rect.m_indices.size(), GL_UNSIGNED_INT, 0);
+    // glDrawArrays(GL_TRIANGLES, 0, 3);
+    glBindVertexArray(0);
 }

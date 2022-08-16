@@ -5,6 +5,9 @@
 #include <vector>
 #include <array>
 #include <string>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 using std::string;
 using std::vector;
 using std::array;
@@ -12,8 +15,9 @@ using std::array;
 #define SUCCESS 0
 #define FAILED -1
 
-#define uint unsigned int
-#define uchar unsigned char
+
+typedef unsigned int uint;
+typedef unsigned char uchar;
 typedef union{
     float v[4];
 

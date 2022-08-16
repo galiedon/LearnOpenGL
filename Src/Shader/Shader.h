@@ -1,5 +1,6 @@
 #pragma once
 #include "../include/main.h"
+using namespace glm;
 
 class Shader{
 
@@ -17,6 +18,8 @@ public:
     void setBool(const string &name, bool value) const;
     void setInt(const string &name, int value) const;
     void setFloat(const string &name, float value) const;
+    void setMat4(const string &name, uint columnMajorOrder, mat4 value) const;
+    void setVec3(const string &name, vec3 value) const;
 
     string readFile(string filePath);
 

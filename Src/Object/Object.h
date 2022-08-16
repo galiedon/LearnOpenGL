@@ -13,6 +13,7 @@ public:
     vector<float> m_vertices;
     vector<uint> m_indices;
     Shader shader;
+    mat4 m_model;
     
     Object();
     

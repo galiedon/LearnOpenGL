@@ -5,10 +5,10 @@ set install_path="Binaries\Debug"
 
 cmake -S . -B %build_path%
 
-@REM ç¬¬ä¸€æ¬¡ç”Ÿæˆçš„æ—¶å€™ä¼šå› ä¸ºæ²¡æœ‰gladè€ŒæŠ¥é”™
+@REM µÚÒ»´ÎÉú³ÉµÄÊ±ºò»áÒòÎªÃ»ÓĞglad¶ø±¨´í
 cmake --build %build_path%
 
-@REM ç¬¬äºŒæ¬¡ä¼šåœ¨ç¬¬ä¸€æ¬¡ç”Ÿæˆçš„åŸºç¡€ä¸Šç»§ç»­ã€‚
+@REM µÚ¶ş´Î»áÔÚµÚÒ»´ÎÉú³ÉµÄ»ù´¡ÉÏ¼ÌĞø¡£
 cmake --build %build_path%
 
 cmake --install %build_path% --prefix %install_path% --config Debug
